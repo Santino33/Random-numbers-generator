@@ -20,11 +20,15 @@ st.set_option('client.showSidebarNavigation', True)
 st.markdown("""
 <style>
     .main-header {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #2E86AB;
+        font-size: 3.5rem;
+        font-weight: 900;
+        background: linear-gradient(135deg, #2E86AB 0%, #A23B72 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         text-align: center;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
     .sub-header {
         font-size: 1.5rem;
@@ -276,7 +280,12 @@ def run_tests(numeros: List[float], nivel_significancia: float = 0.05):
 
 
 def main():
-    st.markdown('<p class="main-header">🎲 Simulador de Números Aleatorios</p>', unsafe_allow_html=True)
+    st.markdown('''
+    <p class="main-header">🎲 Simulador de Números Aleatorios</p>
+    <p style="font-size: 1.2rem; color: #666; text-align: center; margin-bottom: 2rem;">
+        Generadores Congruenciales • Cuadrados Medios • Pruebas Estadísticas
+    </p>
+    ''', unsafe_allow_html=True)
     
     generador = sidebar_generators()
     
