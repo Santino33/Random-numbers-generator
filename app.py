@@ -38,6 +38,7 @@ st.markdown("""
         border-left: 5px solid #28A745;
         border-radius: 5px;
         margin: 1rem 0;
+        color: #155724;
     }
     .error-box {
         padding: 1rem;
@@ -45,6 +46,7 @@ st.markdown("""
         border-left: 5px solid #DC3545;
         border-radius: 5px;
         margin: 1rem 0;
+        color: #721C24;
     }
     .info-box {
         padding: 1rem;
