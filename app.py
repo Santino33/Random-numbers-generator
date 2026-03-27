@@ -20,15 +20,15 @@ st.set_option('client.showSidebarNavigation', True)
 st.markdown("""
 <style>
     .main-header {
-        font-size: 3.5rem;
+        font-size: 5rem;
         font-weight: 900;
-        background: linear-gradient(135deg, #2E86AB 0%, #A23B72 100%);
+        background: linear-gradient(135deg, #2E86AB 0%, #A23B72 50%, #28A745 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         text-align: center;
-        margin-bottom: 1.5rem;
-        padding: 1rem;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        margin-bottom: 0.5rem;
+        padding: 1.5rem;
+        letter-spacing: -2px;
     }
     .sub-header {
         font-size: 1.5rem;
