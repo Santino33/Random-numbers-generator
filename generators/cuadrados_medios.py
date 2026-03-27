@@ -57,7 +57,10 @@ class CuadradosMedios:
             
     def _obtener_digitos_centrales(self, numero: int) -> int:
         """Obtiene los dígitos centrales del número"""
-        numero_str = str(numero).zfill(2 * self.k)
+        numero_str = str(numero)
+        
+        if len(numero_str) < 2 * self.k:
+            numero_str = numero_str.zfill(2 * self.k)
         
         if self.truncamiento == '2k':
             inicio = (len(numero_str) - 2 * self.k) // 2
@@ -76,6 +79,11 @@ class CuadradosMedios:
         self._historial = []
         
         xi = self.semilla
+        
+        if self.truncamiento == '2k':
+            max_val = 10 ** (2 * self.k) - 1
+        else:
+            max_val = 10 ** self.k - 1
         divisor = 10 ** self.k - 1
         
         seen = {}
@@ -83,8 +91,17 @@ class CuadradosMedios:
         for i in range(self.n):
             xi_cuadrado = xi ** 2
             xi = self._obtener_digitos_centrales(xi_cuadrado)
-            ri = round(xi / divisor, self.k)
             
+            if self.truncamiento == '2k':
+                ri = round(xi / max_val, self.k + 1)
+            else:
+                ri = round(xi / divisor, self.k)
+            
+            if ri > 1:
+                ri = 1.0
+            if ri < 0:
+                ri = 0.0
+                
             self._secuencia.append(xi)
             self._numeros.append(ri)
             self._historial.append((xi_cuadrado, xi, ri))
@@ -98,6 +115,11 @@ class CuadradosMedios:
     def generar_iterativo(self):
         """Generador iterativo para animaciones"""
         xi = self.semilla
+        
+        if self.truncamiento == '2k':
+            max_val = 10 ** (2 * self.k) - 1
+        else:
+            max_val = 10 ** self.k - 1
         divisor = 10 ** self.k - 1
         
         seen = {}
@@ -105,7 +127,16 @@ class CuadradosMedios:
         for i in range(self.n):
             xi_cuadrado = xi ** 2
             xi = self._obtener_digitos_centrales(xi_cuadrado)
-            ri = round(xi / divisor, self.k)
+            
+            if self.truncamiento == '2k':
+                ri = round(xi / max_val, self.k + 1)
+            else:
+                ri = round(xi / divisor, self.k)
+            
+            if ri > 1:
+                ri = 1.0
+            if ri < 0:
+                ri = 0.0
             
             if xi in seen and self._periodo is None:
                 self._periodo = i - seen[xi]

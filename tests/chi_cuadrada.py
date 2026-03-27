@@ -31,13 +31,24 @@ class ChiCuadrada:
     num_intervalos: int = None
     
     def __post_init__(self):
+        self._normalizar_datos()
         self._validar_datos()
+        
+    def _normalizar_datos(self):
+        """Normaliza los números al intervalo [0, 1]"""
+        numeros_min = min(self.numeros)
+        numeros_max = max(self.numeros)
+        
+        if numeros_min < 0 or numeros_max > 1:
+            if numeros_max != numeros_min:
+                self.numeros = [(r - numeros_min) / (numeros_max - numeros_min) 
+                               for r in self.numeros]
+            else:
+                self.numeros = [0.5] * len(self.numeros)
         
     def _validar_datos(self):
         if not self.numeros:
             raise ValueError("La lista de números no puede estar vacía")
-        if any(n < 0 or n > 1 for n in self.numeros):
-            raise ValueError("Los números deben estar en el intervalo [0, 1]")
             
     def _calcular_intervalos(self) -> int:
         """Calcula el número óptimo de intervalos usando regla de Sturges"""

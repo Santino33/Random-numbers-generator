@@ -36,8 +36,21 @@ class PruebaPoker:
     digitos: int = 5
     
     def __post_init__(self):
+        self._normalizar_datos()
         self._validar_datos()
         self._cargar_probabilidades()
+        
+    def _normalizar_datos(self):
+        """Normaliza los números al intervalo [0, 1]"""
+        numeros_min = min(self.numeros)
+        numeros_max = max(self.numeros)
+        
+        if numeros_min < 0 or numeros_max > 1:
+            if numeros_max != numeros_min:
+                self.numeros = [(r - numeros_min) / (numeros_max - numeros_min) 
+                               for r in self.numeros]
+            else:
+                self.numeros = [0.5] * len(self.numeros)
         
     def _validar_datos(self):
         if not self.numeros:
